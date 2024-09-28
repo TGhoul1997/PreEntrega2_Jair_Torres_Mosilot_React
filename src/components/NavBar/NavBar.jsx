@@ -2,6 +2,7 @@ import { useState } from "react";
 import CartWidget from "../CartWidget/CartWidget";
 import logo from "../../assets/logo.png";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 
 function NavBar({ categoryList, setSelectedCategory, state }) {
   return (
@@ -11,9 +12,16 @@ function NavBar({ categoryList, setSelectedCategory, state }) {
       </div>
       <ul className="flex space-x-16 list-none">
         {categoryList.map((new_category) => {
+          if (new_category == categoryList[0]) {
+            return (
+              <li className="text-xl">
+                <Link to={`/`}>{new_category}</Link>
+              </li>
+            );
+          }
           return (
             <li className="text-xl">
-              <a href="#">{new_category}</a>
+              <Link to={new_category}>{new_category}</Link>
             </li>
           );
         })}
