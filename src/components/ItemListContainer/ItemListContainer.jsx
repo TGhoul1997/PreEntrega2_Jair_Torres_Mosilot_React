@@ -12,26 +12,37 @@ async function fetch_data(setData) {
 function ItemListContainer() {
     const params = useParams();
     const [data, setData] = useState([]);
-    const [category, setCategory] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
+        fetch_categories(setCategories);
         fetch_data(setData);
+        fetch_data_by_category(setData, params); 
     }, [])
 
-    return(
-    <>
-    <div className="grid grid-cols-5">
-    {data.map((pokemon, i) => {
-            return(
-                <div className="text-xl m-6">
-                    <SinglePokemon pokemon={pokemon}/>
+    return (
+        <>
+        <select>
+            {categories.map((category, i) => {
+            return (
+                <option key={i} value={category.name}>
+                    {category.name}
+                </option>
+            );
+            })}
+        </select>
+
+        <div className="grid grid-cols-5 gap-20 p-10">
+            {data.map((product, i) => {
+            return (
+                <div key={i}>
+                    <SinglePokemon pokemon={product} />
                 </div>
-            )
-        })}
-    </div> 
-    </>
-    )
-    
+            );
+            })}
+        </div>
+        </>
+    );
 };
 
 export default ItemListContainer;

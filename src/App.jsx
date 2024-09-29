@@ -2,7 +2,6 @@ import NavBar from "./components/NavBar/NavBar";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import { useState } from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import SinglePokemon from "./components/SinglePokemon/SinglePokemon";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("home");
@@ -14,9 +13,12 @@ function App() {
       state={selectedCategory}
       />
       <Routes>
-        <Route exact path="/" element={<ItemListContainer greeting={"Welcome to my shop!"} />} />
-        <Route exact path="/products/:category" element={<ItemListContainer />} />
-        {/* <Route exact path="/contact us" element={<ItemListContainer greeting={"Contact Us"} />} /> */}
+        <Route exact path="/" 
+        element={<ItemListContainer  />}/>
+        <Route exact path="/products" 
+        element={<ItemListContainer  />} />
+        <Route exact path="/products/:category/:id" 
+        element={<ItemListContainer  />} />
       </Routes>
     </BrowserRouter>
   );
